@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werewolf Telegram Bot Game - Scoreboard</title>
+  <!-- Spooky Google Font for a Halloween vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Creepster', cursive, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #e63946;
+      text-shadow: 2px 2px 4px #000;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border: 2px solid #e63946;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #333;
+      color: #e63946;
+      font-size: 1.1em;
+    }
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    tr:hover {
+      background-color: rgba(230, 57, 70, 0.2);
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>Werewolf Game Scoreboard</h1>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Player Name</th>
+          <th>win points</th>
+          <th>bet points</th>
+          <th>Total Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Highest scorers first -->
+        <tr>
+          <td>Suppy</td>
+          <td>4</td>
+          <td>5</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>@zoplee</td>
+          <td>3</td>
+          <td>5</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Zayan</td>
+          <td>3</td>
+          <td>5</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Limit breaker</td>
+          <td>0</td>
+          <td>7</td>
+          <td>7</td>
+        </tr>
+        <!-- All players with a total of 5 points -->
+        <tr>
+          <td>John g.</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Elina</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Dr mmn</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Cu neetas</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Av</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Yayha</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Paul</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Nat</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Shafi</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Taelian</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Maze tempest</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Susu</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Akash</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Phantom edge</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Jaxh</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Albert kojakh</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Kreyon</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Jr.</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Xd</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Kiri</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Sugar rush</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Andie</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Ainin</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>King duck</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Not k.</td>
+          <td>0</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <!-- Next, players with totals less than 5 -->
+        <tr>
+          <td>Mothy</td>
+          <td>0</td>
+          <td>3</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Hiro</td>
+          <td>0</td>
+          <td>2</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Thejas</td>
+          <td>0</td>
+          <td>2</td>
+          <td>2</td>
+        </tr>
+        <!-- Lastly, players with 0 points -->
+        <tr>
+          <td>Maryam</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Suga</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Odin</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Tidal</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Vladmir</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Pat</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Zincy</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Rose</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    &copy; 2025 Werewolf Game. All rights reserved.
+  </footer>
+</body>
+</html>
