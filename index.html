@@ -1,330 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Werewolf Telegram Bot Game - Scoreboard</title>
-  <!-- Spooky Google Font for a Halloween vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-  <style>
-    /* Reset and basic styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background: #111;
-      color: #eee;
-      font-family: 'Creepster', cursive, sans-serif;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #e63946;
-      text-shadow: 2px 2px 4px #000;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border: 2px solid #e63946;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0 auto;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #333;
-      color: #e63946;
-      font-size: 1.1em;
-    }
-    tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    tr:hover {
-      background-color: rgba(230, 57, 70, 0.2);
-    }
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0.8em;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally's Birthday Surprise</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 500% 500%;
+            animation: gradientShift 20s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Animated background particles */
+        .bg-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 15s infinite linear;
+            opacity: 0.1;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .title {
+            text-align: center;
+            color: #fff;
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(20px, 5vw, 32px);
+            text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,105,180,0.6);
+            padding: 20px;
+            z-index: 100;
+            position: relative;
+            animation: titlePulse 3s ease-in-out infinite;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); text-shadow: 0 0 30px rgba(255,255,255,1); }
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 140px);
+            border-radius: 20px;
+            margin: 0 10px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .score-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 15px 25px;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .score {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: scoreGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes scoreGlow {
+            0%, 100% { text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 2px 4px rgba(0,0,0,0.3); }
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: clamp(25px, 6vw, 40px);
+            animation: emojiFloat 12s linear infinite;
+            z-index: 10;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        @keyframes emojiFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) translateX(10px) rotate(36deg) scale(1);
+            }
+            50% {
+                transform: translateY(50vh) translateX(-20px) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) translateX(30px) rotate(324deg) scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) translateX(50px) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .cockroach {
+            position: absolute;
+            font-size: clamp(35px, 8vw, 50px);
+            cursor: pointer;
+            animation: cockroachMove 4s ease-in-out infinite;
+            z-index: 50;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+
+        .cockroach:hover {
+            transform: scale(1.3) rotate(15deg);
+            filter: drop-shadow(0 10px 25px rgba(255,0,0,0.4));
+        }
+
+        .cockroach:active {
+            transform: scale(0.8);
+        }
+
+        @keyframes cockroachMove {
+            0%, 100% {
+                transform: translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(40px) rotate(45deg) scale(1.1);
+            }
+            50% {
+                transform: translateX(80px) rotate(90deg) scale(0.9);
+            }
+            75% {
+                transform: translateX(40px) rotate(135deg) scale(1.1);
+            }
+        }
+
+        .sticker-popup {
+            position: absolute;
+            font-size: clamp(50px, 12vw, 80px);
+            animation: stickerPop 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            z-index: 75;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
+        }
+
+        @keyframes stickerPop {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 1;
+            }
+            60% {
+                transform: scale(1) rotate(270deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .victory-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(20px, 5vw, 28px);
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            z-index: 200;
+            border: 2px solid rgba(255,215,0,0.6);
+            animation: victoryAppear 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            display: none;
+        }
+
+        @keyframes victoryAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .victory-message.show {
+            display: block;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: fireworkExplode 2s ease-out forwards;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3);
+            }
+        }
+
+        .instructions {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            text-align: center;
+            font-size: clamp(14px, 3.5vw, 18px);
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 100;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: instructionsPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes instructionsPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        .combo-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Fredoka One', cursive;
+            font-size: 40px;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+            z-index: 150;
+            pointer-events: none;
+            animation: comboFade 2s ease-out forwards;
+            display: none;
+        }
+
+        @keyframes comboFade {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        .power-up {
+            position: absolute;
+            font-size: 30px;
+            animation: powerUpFloat 3s ease-out forwards;
+            z-index: 60;
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.8));
+        }
+
+        @keyframes powerUpFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2);
+            }
+            100% {
+                transform: translateY(-40px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .hit-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,0,0.8) 0%, rgba(255,0,0,0.4) 50%, transparent 100%);
+            animation: hitEffectExpand 0.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        @keyframes hitEffectExpand {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .game-container {
+                margin: 0 5px;
+                height: calc(100vh - 120px);
+            }
+            
+            .score-container {
+                top: 10px;
+                right: 10px;
+                padding: 10px 20px;
+            }
+            
+            .instructions {
+                bottom: 20px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .victory-message {
+                padding: 30px 20px;
+                margin: 0 10px;
+                font-size: 22px;
+            }
+        }
+
+        /* Dark theme support */
+        @media (prefers-color-scheme: dark) {
+            .victory-message {
+                background: linear-gradient(135deg, rgba(20,20,20,0.95), rgba(40,40,40,0.9));
+                color: #fff;
+                border-color: rgba(255,215,0,0.8);
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Werewolf Game Scoreboard</h1>
-  <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>Player Name</th>
-          <th>win points</th>
-          <th>bet points</th>
-          <th>Total Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Highest scorers first -->
-        <tr>
-          <td>Suppy</td>
-          <td>4</td>
-          <td>5</td>
-          <td>9</td>
-        </tr>
-        <tr>
-          <td>@zoplee</td>
-          <td>3</td>
-          <td>5</td>
-          <td>8</td>
-        </tr>
-        <tr>
-          <td>Zayan</td>
-          <td>3</td>
-          <td>5</td>
-          <td>8</td>
-        </tr>
-        <tr>
-          <td>Limit breaker</td>
-          <td>0</td>
-          <td>7</td>
-          <td>7</td>
-        </tr>
-        <!-- All players with a total of 5 points -->
-        <tr>
-          <td>John g.</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Elina</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Dr mmn</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Cu neetas</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Av</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Yayha</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Paul</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Nat</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Shafi</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Taelian</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Maze tempest</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Susu</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Akash</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Phantom edge</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Jaxh</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Albert kojakh</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Kreyon</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Jr.</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Xd</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Kiri</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Sugar rush</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Andie</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Ainin</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>King duck</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>Not k.</td>
-          <td>0</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <!-- Next, players with totals less than 5 -->
-        <tr>
-          <td>Mothy</td>
-          <td>0</td>
-          <td>3</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>Hiro</td>
-          <td>0</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>Thejas</td>
-          <td>0</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <!-- Lastly, players with 0 points -->
-        <tr>
-          <td>Maryam</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Suga</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Odin</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Tidal</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Vladmir</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Pat</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Zincy</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Rose</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <footer>
-    &copy; 2025 Werewolf Game. All rights reserved.
-  </footer>
+    <div class="title">🎉 HAPPY BIRTHDAY TALLY! 🎉<br>Cockroach Queen Supreme!</div>
+    <div class="game-container">
+        <div class="score-container">
+            <div class="score">Score: <span id="score">0</span>/10</div>
+        </div>
+        <div class="instructions">🪳 Tap the cockroaches to become the ultimate Cockroach Queen! 👑</div>
+        <div class="combo-display" id="comboDisplay">COMBO!</div>
+    </div>
+    
+    <div class="victory-message" id="victoryMessage">
+        🎉 Happy Birthday Tally!<br>
+        You are officially the<br>
+        <strong>Cockroach Queen! 👑</strong><br>
+        <small style="font-family: 'Poppins', sans-serif; font-size: 16px; margin-top: 10px; display: block;">
+            🦛 Even hippos can achieve greatness! 🦛
+        </small>
+    </div>
+
+    <script>
+        let score = 0;
+        let combo = 0;
+        let lastHit = 0;
+        const targetScore = 10;
+        const emojis = ['🪳', '🦛', '🐒', '🐷', '🐴', '🧙♀️', '🐈‍⬛'];
+        const stickerEmojis = ['🎉', '🎂', '🎁', '🎈', '🎊', '💕', '👑', '✨', '🌟', '💫'];
+        const powerUps = ['⭐', '💎', '🔥', '⚡'];
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+        
+        // Game state
+        let gameActive = true;
+        let powerUpActive = false;
+        
+        // Initialize game
+        init();
+        
+        function init() {
+            createBackgroundParticles();
+            createFloatingEmojis();
+            createCockroaches();
+            showRandomStickers();
+            spawnPowerUps();
+            
+            // Add touch/click sound simulation
+            document.addEventListener('click', playClickFeedback);
+            document.addEventListener('touchstart', playClickFeedback);
+        }
+        
+        function createBackgroundParticles() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'bg-particle';
+                    particle.style.left = Math.random() * window.innerWidth + 'px';
+                    particle.style.width = particle.style.height = (Math.random() * 20 + 10) + 'px';
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.animationDelay = (Math.random() * 15) + 's';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) particle.remove();
+                    }, 15000);
+                }, i * 1000);
+            }
+            
+            // Continuously create particles
+            setTimeout(createBackgroundParticles, 15000);
+        }
+
+        function createFloatingEmojis() {
+            setInterval(() => {
+                if (!gameActive && score >= targetScore) return;
+                
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+                emoji.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                emoji.style.animationDelay = (Math.random() * 2) + 's';
+                document.body.appendChild(emoji);
+                
+                setTimeout(() => {
+                    if (emoji.parentNode) emoji.remove();
+                }, 12000);
+            }, 1500);
+        }
+
+        function createCockroaches() {
+            if (!gameActive) return;
+            
+            const interval = setInterval(() => {
+                if (score >= targetScore) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                const cockroach = document.createElement('div');
+                cockroach.className = 'cockroach';
+                cockroach.textContent = '🪳';
+                cockroach.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+                cockroach.style.top = Math.random() * (window.innerHeight - 300) + 150 + 'px';
+                cockroach.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                
+                // Add click/touch handlers
+                const handleHit = (e) => {
+                    e.preventDefault();
+                    hitCockroach(cockroach);
+                };
+                
+                cockroach.addEventListener('click', handleHit);
+                cockroach.addEventListener('touchstart', handleHit);
+                
+                document.querySelector('.game-container').appendChild(cockroach);
+                
+                setTimeout(() => {
+                    if (cockroach.parentNode) {
+                        cockroach.remove();
+                    }
+                }, 4000);
+            }, Math.random() * 1000 + 1000);
+        }
+
+        function hitCockroach(cockroach) {
+            const now = Date.now();
+            const timeSinceLastHit = now - lastHit;
+            
+            // Update score
+            let points = 1;
+            if (powerUpActive) points *= 2;
+            if (timeSinceLastHit < 1000) {
+                combo++;
+                if (combo > 2) {
+                    points += combo;
+                    showCombo();
+                }
+            } else {
+                combo = 0;
+            }
+            
+            score += points;
+            lastHit = now;
+            document.getElementById('score').textContent = score;
+            
+            // Visual feedback
+            const rect = cockroach.getBoundingClientRect();
+            createHitEffect(rect.left + rect.width/2, rect.top + rect.height/2);
+            createScorePopup(rect.left + rect.width/2, rect.top, '+' + points);
+            
+            // Remove cockroach with animation
+            cockroach.style.animation = 'none';
+            cockroach.style.transform = 'scale(0) rotate(720deg)';
+            cockroach.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            
+            setTimeout(() => {
+                if (cockroach.parentNode) cockroach.remove();
+            }, 300);
+            
+            // Check for victory
+            if (score >= targetScore) {
+                setTimeout(() => showVictory(), 500);
+            }
+            
+            // Haptic feedback simulation
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        function createHitEffect(x, y) {
+            const effect = document.createElement('div');
+            effect.className = 'hit-effect';
+            effect.style.left = (x - 50) + 'px';
+            effect.style.top = (y - 50) + 'px';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                if (effect.parentNode) effect.remove();
+            }, 500);
+        }
+
+        function createScorePopup(x, y, text) {
+            const popup = document.createElement('div');
+            popup.textContent = text;
+            popup.style.position = 'absolute';
+            popup.style.left = x + 'px';
+            popup.style.top = y + 'px';
+            popup.style.color = '#FFD700';
+            popup.style.fontSize = '24px';
+            popup.style.fontWeight = 'bold';
+            popup.style.fontFamily = "'Fredoka One', cursive";
+            popup.style.textShadow = '0 0 10px rgba(255,215,0,0.8)';
+            popup.style.pointerEvents = 'none';
+            popup.style.zIndex = '150';
+            popup.style.animation = 'comboFade 1.5s ease-out forwards';
+            document.body.appendChild(popup);
+            
+            setTimeout(() => {
+                if (popup.parentNode) popup.remove();
+            }, 1500);
+        }
+
+        function showCombo() {
+            const comboDisplay = document.getElementById('comboDisplay');
+            comboDisplay.textContent = `${combo}X COMBO!`;
+            comboDisplay.style.display = 'block';
+            comboDisplay.style.animation = 'none';
+            setTimeout(() => {
+                comboDisplay.style.animation = 'comboFade 2s ease-out forwards';
+            }, 10);
+            
+            setTimeout(() => {
+                comboDisplay.style.display = 'none';
+            }, 2000);
+        }
+
+        function spawnPowerUps() {
+            setInterval(() => {
+                if (score >= targetScore || Math.random() > 0.3) return;
+                
+                const powerUp = document.createElement('div');
+                powerUp.className = 'power-up';
+                powerUp.textContent = powerUps[Math.floor(Math.random() * powerUps.length)];
+                powerUp.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+                powerUp.style.top = Math.random() * (window.innerHeight - 200) + 100 + 'px';
+                
+                const handlePowerUp = (e) => {
+                    e.preventDefault();
+                    activatePowerUp(powerUp);
+                };
+                
+                powerUp.addEventListener('click', handlePowerUp);
+                powerUp.addEventListener('touchstart', handlePowerUp);
+                
+                document.body.appendChild(powerUp);
+                
+                setTimeout(() => {
+                    if (powerUp.parentNode) powerUp.remove();
+                }, 3000);
+            }, 5000);
+        }
+
+        function activatePowerUp(powerUp) {
+            powerUpActive = true;
+            powerUp.remove();
+            
+            // Visual indication
+            document.body.style.filter = 'hue-rotate(60deg) saturate(1.5)';
+            
+            setTimeout(() => {
+                powerUpActive = false;
+                document.body.style.filter = 'none';
+            }, 5000);
+        }
+
+        function showRandomStickers() {
+            setInterval(() => {
+                if (score >= targetScore) return;
+                
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker-popup';
+                sticker.textContent = stickerEmojis[Math.floor(Math.random() * stickerEmojis.length)];
+                sticker.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+                sticker.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+                sticker.style.animationDelay = (Math.random() * 1) + 's';
+                
+                document.body.appendChild(sticker);
+                
+                setTimeout(() => {
+                    if (sticker.parentNode) sticker.remove();
+                }, 3000);
+            }, 2500);
+        }
+
+        function showVictory() {
+            gameActive = false;
+            const victoryMessage = document.getElementById('victoryMessage');
+            victoryMessage.classList.add('show');
+            
+            // Create massive fireworks display
+            createFireworksShow();
+            
+            // Send completion message back to Telegram
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.sendData('victory_achieved');
+            }
+            
+            // Screen shake effect
+            document.body.style.animation = 'shake 0.5s ease-in-out 3';
+        }
+
+        function createFireworksShow() {
+            const fireworksCount = 100;
+            const duration = 5000;
+            
+            for (let i = 0; i < fireworksCount; i++) {
+                setTimeout(() => {
+                    const centerX = Math.random() * window.innerWidth;
+                    const centerY = Math.random() * window.innerHeight;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Create burst pattern
+                    for (let j = 0; j < 12; j++) {
+                        const firework = document.createElement('div');
+                        firework.className = 'firework';
+                        firework.style.backgroundColor = color;
+                        firework.style.left = centerX + 'px';
+                        firework.style.top = centerY + 'px';
+                        
+                        const angle = (j / 12) * 2 * Math.PI;
+                        const distance = Math.random() * 100 + 50;
+                        const finalX = centerX + Math.cos(angle) * distance;
+                        const finalY = centerY + Math.sin(angle) * distance;
+                        
+                        firework.style.transform = `translate(${finalX - centerX}px, ${finalY - centerY}px)`;
+                        
+                        document.body.appendChild(firework);
+                        
+                        setTimeout(() => {
+                            if (firework.parentNode) firework.remove();
+                        }, 2000);
+                    }
+                }, (i / fireworksCount) * duration);
+            }
+        }
+
+        function playClickFeedback() {
+            // Visual click feedback - subtle screen flash
+            document.body.style.backgroundColor = 'rgba(255,255,255,0.1)';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '';
+            }, 50);
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Prevent context menu on long press
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        
+        // Handle orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                location.reload();
+            }, 100);
+        });
+    </script>
 </body>
 </html>
